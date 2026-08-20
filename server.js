@@ -14,11 +14,11 @@ dotenv.config();
 
 const app = express();
 
-// const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
-// ===============================
+// ==========================================
 // MIDDLEWARE
-// ===============================
+// ==========================================
 
 app.use(cors({
     origin: [
@@ -29,17 +29,22 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
 app.use(logger);
 
-// ===============================
+// ==========================================
 // WELCOME ROUTE
-// ===============================
+// ==========================================
 
 app.get("/", (req, res) => {
     res.status(200).json({
         message: "Welcome to Restaurant Management API"
     });
 });
+
+// ==========================================
+// HEALTH CHECK
+// ==========================================
 
 app.get("/health", (req, res) => {
     res.status(200).json({
@@ -48,30 +53,46 @@ app.get("/health", (req, res) => {
     });
 });
 
-// ===============================
+// ==========================================
 // API ROUTES
-// ===============================
+// ==========================================
 
 app.use("/", authRoutes);
+
 app.use("/restaurants", restaurantRoutes);
+
 app.use("/menu", menuRoutes);
 
-// ===============================
+// ==========================================
 // ERROR HANDLER
-// ===============================
+// ==========================================
 
 app.use(errorHandler);
 
-// ===============================
-// DATABASE + SERVER
-// ===============================
+// ==========================================
+// MONGODB + SERVER
+// ==========================================
 
-const PORT = process.env.PORT || 10000;
+const startServer = async () => {
+    try {
 
-app.listen(PORT, "0.0.0.0", () => {
-    console.log("================================");
-    console.log("RESTAURANT API STARTED");
-    console.log("PORT:", PORT);
-    console.log("HOST: 0.0.0.0");
-    console.log("================================");
-});
+        await mongoose.connect(process.env.MONGO_URI);
+
+        console.log("MongoDB connected successfully.");
+
+        app.listen(PORT, "0.0.0.0", () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+
+    } catch (error) {
+
+        console.error(
+            "MongoDB connection failed:",
+            error.message
+        );
+
+        process.exit(1);
+    }
+};
+
+startServer();
