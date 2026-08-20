@@ -14,6 +14,8 @@ dotenv.config();
 
 const app = express();
 
+const PORT = process.env.PORT || 5000;
+
 // ===============================
 // MIDDLEWARE
 // ===============================
@@ -54,24 +56,19 @@ app.use("/menu", menuRoutes);
 app.use(errorHandler);
 
 // ===============================
-// DATABASE CONNECTION
+// DATABASE + SERVER
 // ===============================
 
-let isConnected = false;
-
-const connectDB = async () => {
-
-    if (isConnected) {
-        return;
-    }
-
+const startServer = async () => {
     try {
 
         await mongoose.connect(process.env.MONGO_URI);
 
-        isConnected = true;
-
         console.log("MongoDB connected successfully.");
+
+        app.listen(PORT, "0.0.0.0", () => {
+            console.log(`Server running on port ${PORT}`);
+        });
 
     } catch (error) {
 
@@ -80,31 +77,8 @@ const connectDB = async () => {
             error.message
         );
 
-        throw error;
+        process.exit(1);
     }
 };
 
-// ===============================
-// VERCEL SERVERLESS HANDLER
-// ===============================
-
-const handler = async (req, res) => {
-
-    try {
-
-        await connectDB();
-
-        return app(req, res);
-
-    } catch (error) {
-
-        console.error("Server error:", error);
-
-        return res.status(500).json({
-            message: "Database connection failed",
-            error: error.message
-        });
-    }
-};
-
-module.exports = handler;
+startServer();
