@@ -14,7 +14,7 @@ dotenv.config();
 
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
 
 // ===============================
 // MIDDLEWARE
@@ -66,26 +66,12 @@ app.use(errorHandler);
 // DATABASE + SERVER
 // ===============================
 
-const startServer = async () => {
-    try {
+const PORT = process.env.PORT || 10000;
 
-        await mongoose.connect(process.env.MONGO_URI);
-
-        console.log("MongoDB connected successfully.");
-
-        app.listen(PORT, "0.0.0.0", () => {
-            console.log(`Server running on port ${PORT}`);
-        });
-
-    } catch (error) {
-
-        console.error(
-            "MongoDB connection failed:",
-            error.message
-        );
-
-        process.exit(1);
-    }
-};
-
-startServer();
+app.listen(PORT, "0.0.0.0", () => {
+    console.log("================================");
+    console.log("RESTAURANT API STARTED");
+    console.log("PORT:", PORT);
+    console.log("HOST: 0.0.0.0");
+    console.log("================================");
+});
