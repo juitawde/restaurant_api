@@ -84,6 +84,19 @@ restaurant_api/
 └── README.md
 ```
 
+### 📸 Screenshots 
+
+<img width="1462" height="880" alt="Screenshot 2026-08-21 at 1 21 03 AM" src="https://github.com/user-attachments/assets/a4869811-53ea-4b47-a377-24670f8d8c03" />
+
+<img width="1468" height="881" alt="Screenshot 2026-08-21 at 1 25 43 AM" src="https://github.com/user-attachments/assets/1abdcb8b-210e-4d59-ab2d-91eaff6921fc" />
+
+<img width="1467" height="876" alt="Screenshot 2026-08-21 at 1 22 43 AM" src="https://github.com/user-attachments/assets/c2c429a6-3639-45e1-a63b-784935531030" />
+
+<img width="1470" height="880" alt="Screenshot 2026-08-21 at 1 22 03 AM" src="https://github.com/user-attachments/assets/84790559-41c7-4773-a79f-64648744a2c7" />
+
+<img width="1470" height="882" alt="Screenshot 2026-08-21 at 1 22 20 AM" src="https://github.com/user-attachments/assets/84300310-f4a9-49f2-bb47-6a0c314bb486" />
+
+
 ## 🚀 Getting Started
 
 ### 1. Clone the repository
