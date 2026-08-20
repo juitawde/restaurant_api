@@ -14,48 +14,94 @@ dotenv.config();
 
 const app = express();
 
-const PORT = process.env.PORT || 5000;
-
-// Middleware
+// ===============================
+// MIDDLEWARE
+// ===============================
 
 app.use(cors({
-    origin: "http://localhost:5174"
+    origin: true,
+    credentials: true
 }));
 
 app.use(express.json());
 app.use(logger);
 
-// Welcome route
+// ===============================
+// WELCOME ROUTE
+// ===============================
+
 app.get("/", (req, res) => {
-  res.status(200).json({
-    message: "Welcome to Restaurant Management API"
-  });
+    res.status(200).json({
+        message: "Welcome to Restaurant Management API"
+    });
 });
 
-// API routes
+// ===============================
+// API ROUTES
+// ===============================
+
 app.use("/", authRoutes);
 app.use("/restaurants", restaurantRoutes);
 app.use("/menu", menuRoutes);
 
-// Error handling middleware
+// ===============================
+// ERROR HANDLER
+// ===============================
+
 app.use(errorHandler);
 
-// Connect to MongoDB and start server
-const startServer = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI);
+// ===============================
+// DATABASE CONNECTION
+// ===============================
 
-    console.log("MongoDB connected successfully.");
+let isConnected = false;
 
-    app.listen(PORT, () => {
-      console.log(
-        `Server running at http://localhost:${PORT}`
-      );
-    });
-  } catch (error) {
-    console.error("MongoDB connection failed:", error.message);
-    process.exit(1);
-  }
+const connectDB = async () => {
+
+    if (isConnected) {
+        return;
+    }
+
+    try {
+
+        await mongoose.connect(process.env.MONGO_URI);
+
+        isConnected = true;
+
+        console.log("MongoDB connected successfully.");
+
+    } catch (error) {
+
+        console.error(
+            "MongoDB connection failed:",
+            error.message
+        );
+
+        throw error;
+    }
 };
 
-startServer();
+// ===============================
+// VERCEL SERVERLESS HANDLER
+// ===============================
+
+const handler = async (req, res) => {
+
+    try {
+
+        await connectDB();
+
+        return app(req, res);
+
+    } catch (error) {
+
+        console.error("Server error:", error);
+
+        return res.status(500).json({
+            message: "Database connection failed",
+            error: error.message
+        });
+    }
+};
+
+module.exports = handler;
