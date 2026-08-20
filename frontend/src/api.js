@@ -1,4 +1,4 @@
-const API_URL = "https://restaurant-api-nviq.onrender.com";
+const API_URL = "http://localhost:5000";
 
 const request = async (endpoint, options = {}) => {
     const token = localStorage.getItem("token");

@@ -64,7 +64,7 @@ function Dashboard() {
                         WELCOME BACK
                     </span>
 
-                    <h1>
+                    <h1 className="greeting-heading">
                         Good morning, <em>Manager.</em>
                     </h1>
 

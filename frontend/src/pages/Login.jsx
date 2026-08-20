@@ -39,12 +39,28 @@ function Login() {
                 token
             );
 
-            localStorage.setItem(
-                "user",
-                data.user?.username ||
-                data.user?.email ||
-                form.email
-            );
+            let decodedUsername = "";
+            let decodedEmail = form.email;
+            try {
+                const base64Url = token.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(
+                    window.atob(base64)
+                        .split('')
+                        .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+                        .join('')
+                );
+                const payload = JSON.parse(jsonPayload);
+                if (payload) {
+                    decodedUsername = payload.username || "";
+                    decodedEmail = payload.email || decodedEmail;
+                }
+            } catch (e) {
+                console.error("Failed to decode token", e);
+            }
+
+            localStorage.setItem("user", decodedUsername || decodedEmail);
+            localStorage.setItem("username", decodedUsername);
 
             navigate("/dashboard");
 

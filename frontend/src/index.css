@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap');
 
 :root {
     font-family: "DM Sans", sans-serif;
-    color: #ddd6cc;
-    background: #0b0a09;
+    color: #1A1510;
+    background: #FAF7F2;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 }
 
 * {
@@ -15,7 +16,7 @@
 body {
     margin: 0;
     min-width: 320px;
-    background: #0b0a09;
+    background: #FAF7F2;
 }
 
 button,
