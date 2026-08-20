@@ -19,7 +19,10 @@ const app = express();
 // ===============================
 
 app.use(cors({
-    origin: true,
+    origin: [
+        "http://localhost:5174",
+        "https://restaurant-api-qwy7.vercel.app"
+    ],
     credentials: true
 }));
 
