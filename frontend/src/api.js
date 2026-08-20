@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000";
+const API_URL = "https://restaurant-api-kappa.vercel.app/";
 
 const request = async (endpoint, options = {}) => {
     const token = localStorage.getItem("token");
