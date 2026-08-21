@@ -26,18 +26,29 @@ const allowedOrigins = [
     "https://restaurant-api-bq5c.vercel.app"
 ];
 
-app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
-    credentials: true,
-    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-}));
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+
+    if (allowedOrigins.includes(origin)) {
+        res.header("Access-Control-Allow-Origin", origin);
+    }
+
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header(
+        "Access-Control-Allow-Methods",
+        "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS"
+    );
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Content-Type, Authorization"
+    );
+
+    if (req.method === "OPTIONS") {
+        return res.sendStatus(204);
+    }
+
+    next();
+});
 
 app.use(express.json());
 
