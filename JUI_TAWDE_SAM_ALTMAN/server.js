@@ -24,7 +24,7 @@ app.use(cors({
     origin: [
         "http://localhost:5173",
         "http://localhost:5174",
-        "https://restaurant-api-qwy7.vercel.app"
+        "https://restaurant-api-bq5c.vercel.app"
     ],
     credentials: true
 }));
