@@ -187,19 +187,6 @@ Example response:
 
 ## 🖼️ Screenshots
 
-Screenshots of the application can be added inside a `screenshots` folder.
-
-Recommended structure:
-
-```text
-screenshots/
-├── login.png
-├── register.png
-├── dashboard.png
-├── restaurants.png
-└── menu.png
-```
-
 ### Login Page
 
 <img width="2916" height="1762" alt="image" src="https://github.com/user-attachments/assets/9f3beb70-2e94-454c-a3d9-9328fe1aaf18" />
