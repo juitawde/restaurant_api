@@ -1,4 +1,4 @@
-const API_URL = "https://restaurant-api-4ldy.onrender.com/";
+const API_URL = "https://restaurant-api-4ldy.onrender.com";
 
 const request = async (endpoint, options = {}) => {
     const token = localStorage.getItem("token");
