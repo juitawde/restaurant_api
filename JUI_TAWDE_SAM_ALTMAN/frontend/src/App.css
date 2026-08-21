@@ -340,7 +340,7 @@ em {
     padding: 0 48px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: right;
     border-bottom: 1px solid var(--cream-border);
     background: var(--cream-card);
     box-shadow: var(--shadow-xs);
