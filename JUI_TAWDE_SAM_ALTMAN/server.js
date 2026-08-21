@@ -27,6 +27,9 @@ const allowedOrigins = [
 ];
 
 app.use((req, res, next) => {
+    console.log("CORS DEBUG - Origin:", req.headers.origin);
+    console.log("CORS DEBUG - Method:", req.method);
+
     const origin = req.headers.origin;
 
     if (allowedOrigins.includes(origin)) {
