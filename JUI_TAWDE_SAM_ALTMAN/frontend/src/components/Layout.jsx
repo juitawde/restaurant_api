@@ -134,12 +134,6 @@ function Layout({ children }) {
 
                 <header className="topbar">
 
-                    <div className="topbar-label">
-                        <span className="topbar-portal-text">
-                            Management Portal
-                        </span>
-                    </div>
-
                     <div className="user-area">
                         <span className="user-name">{username}</span>
 
